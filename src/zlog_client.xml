@@ -1,0 +1,47 @@
+<class
+    name = "zlog_client"
+    title = "zlogger client"
+    script = "zproto_client_c"
+    protocol_class = "zlog_msg"
+    package_dir = "../include"
+    source_dir = "."
+    >
+
+    <state name = "start" inherit = "defaults">
+        <event name = "constructor" next = "connected">
+            <action name = "send" message = "HELLO" />
+        </event>
+    </state>
+
+    <state name = "connected" inherit = "defaults">
+        <event name = "heartbeat">
+            <action name = "send" message = "PING" />
+        </event>
+        <event name = "message">
+            <action name = "message to log" />
+            <action name = "send" message = "LOG" />
+        </event>
+        <event name = "GOODBYE">
+            <action name = "user leaving" />
+            <action name = "terminate" />
+        </event>
+    </state>
+
+    <state name = "defaults">
+        <event name = "heartbeat">
+            <action name = "send" message = "PING" />
+        </event>
+        <event name = "*">
+            <action name = "send" message = "RTFM" />
+            <action name = "terminate" />
+        </event>
+    </state>
+
+    <method name = "log">
+        Log a message
+        <field name = "level" type = "number" size = "1" />
+        <field name = "function" type = "string">Function where logging from</field>
+        <field name = "time" type = "number" size = "8">Log date/time</field>
+        <field name = "message" type = "longstr">Actual log message</field>
+    </method>
+</class>

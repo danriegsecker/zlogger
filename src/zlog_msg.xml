@@ -1,0 +1,46 @@
+<class
+    name = "zlog_msg"
+    signature = "0"
+    title = "zlogger protocol"
+    script = "zproto_codec_c"
+    package_dir = "../include"
+    source_dir = "."
+    >
+
+    <include filename = "../license.xml" />
+
+    <define name = "VERSION" value = "1" />
+
+    <message name = "HELLO" id = "1">
+        Client introduces themself to the server
+    </message>
+
+    <message name = "WELCOME" id = "2">
+        Server responds to hello
+    </message>
+
+    <message name = "GOODBYE" id = "3">
+        Server or Client is leaving
+    </message>
+
+    <message name = "RTFM" id = "4">
+        Server's response to something it doesn't like
+    </message>
+
+    <message name = "LOG" id = "10">
+        Client sends data for server to log
+        <field name = "level" type = "number" size = "1">Log severity level</field>
+        <field name = "function" type = "string">Function where logging from</field>
+        <field name = "time" type = "number" size = "8">Log date/time</field>
+        <field name = "message" type = "longstr">Actual log message</field>
+    </method>
+
+    <message name = "PING" id = "50">
+        Send a ping from client to server
+    </message>
+
+    <message name = "PONG" id = "51">
+        Server's response to a ping
+    </message>
+
+</class>

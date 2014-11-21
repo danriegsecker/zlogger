@@ -1,0 +1,38 @@
+<class
+    name = "zlog_server"
+    title = "zlogger server"
+    script = "zproto_server_c"
+    protocol_class = "zlog_msg"
+    package_dir = "../include"
+    source_dir = "."
+    >
+
+    <state name = "start" inherit = "defaults">
+        <event name = "HELLO" next = "active">
+            <action name = "send" message = "WELCOME" />
+        </event>
+    </state>
+
+    <state name = "active" inherit = "defaults">
+        <event name = "LOG">
+            <action name = "log message" />
+        </event>
+        <event name = "GOODBYE">
+            <action name = "user leaving" />
+            <action name = "terminate" />
+        </event>
+    </state>
+
+    <state name = "defaults">
+        <event name = "PING">
+            <action name = "send" message = "PONG" />
+        </event>
+        <event name = "expired">
+            <action name = "terminate" />
+        </event>
+        <event name = "*">
+            <action name = "send" message = "RTFM" />
+            <action name = "terminate" />
+        </event>
+    </state>
+</class>

@@ -13,6 +13,8 @@
 *.a
 *.la
 *.lo
+*.Plo
+*.Po
 
 # Shared objects (inc. Windows DLLs)
 *.dll
@@ -27,3 +29,25 @@
 *.i*86
 *.x86_64
 *.hex
+
+# Additionals
+src/.deps/
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+config.log
+config.status
+config/
+configure
+doc/Makefile
+doc/Makefile.in
+libtool
+src/.libs/
+src/Makefile
+src/Makefile.in
+src/platform.h
+src/platform.h.in
+src/stamp-h1
+*.swp
+*.dirstamp
